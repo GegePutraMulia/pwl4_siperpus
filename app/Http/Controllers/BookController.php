@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BookExport;
+use App\Imports\BookImport;
 use App\Models\Book;
 use App\Models\Bookshelf;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookController extends Controller
 {
@@ -127,5 +130,13 @@ class BookController extends Controller
             ->stream('data_buku.pdf');
     }
 
+    public function export()
+    {
+        return Excel::download(new BookExport, 'data_buku.xlsx');
+    }
 
+    public function import()
+    {
+
+    }
 }
